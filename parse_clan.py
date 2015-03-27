@@ -21,6 +21,7 @@ timestamps = {}
 
 with open(filename) as f:
    for line in f:
+      line = line.replace('&cv', '').strip()
       line = line.strip()
       if line.find("Total number of items") != -1:
          file_total = int(line.split()[0])
