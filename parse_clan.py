@@ -19,7 +19,7 @@ subID = os.path.split(filename)[1].split("_")
 subID = subID[0] + '_' + subID[1]
 print(subID)
 
-input_file = os.path.join(os.path.dirname(os.path.realpath(filename)), subID + '_consensus.cex')
+input_file = os.path.join(os.path.dirname(os.path.realpath(filename)), subID + '_coder.cex')
 
 output_file = input_file[:-4] + '_processed.csv'
 print("saving to %s" % output_file)
