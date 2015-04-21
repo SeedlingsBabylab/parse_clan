@@ -14,12 +14,13 @@ print(sys.platform)
    
 Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
 filename = askopenfilename(filetypes=[("cex files", "*.cex")]) # show an "Open" dialog box and return the path to the selected file
-print(os.path.split(filename))
-subID = os.path.split(filename)[1].split("_")
-subID = subID[0] + '_' + subID[1]
-print(subID)
+#print(os.path.split(filename))
+#subID = os.path.split(filename)[1].split("_")
+#subID = subID[0] + '_' + subID[1]
+#print(subID)
 
-input_file = os.path.join(os.path.dirname(os.path.realpath(filename)), subID + '_coder.cex')
+#input_file = os.path.join(os.path.dirname(os.path.realpath(filename)), subID + '_consensus.cex')
+input_file = os.path.realpath(filename)
 
 output_file = input_file[:-4] + '_processed.csv'
 print("saving to %s" % output_file)
