@@ -38,6 +38,7 @@ in_comment = False
 with open(input_file) as f:
    for line in f:
       line = line.replace('&cv', '').strip()
+      line = line.replace('&CV', '').strip()
       line = line.strip()
       if line.find("Total number of items") != -1:
          file_total = int(line.split()[0])
