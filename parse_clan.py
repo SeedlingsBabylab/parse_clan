@@ -101,7 +101,7 @@ class Parser:
 
    def parse(self):
       #print the header line
-      output(self.out, "tier,word,utterance_type,object_present,speaker,timestamp,comment,basic_level\n")
+      output(self.out, "tier,word,utterance_type,object_present,speaker,timestamp,basic_level,comment\n")
 
       full_line = ''
       with open(self.input_file) as f:
