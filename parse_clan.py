@@ -24,11 +24,7 @@ class Parser:
       line = line.replace('&CV', '').strip()
       line = line.strip()
       comment = "NA"
-      if line.find("Total number of items") != -1:
-         file_total = int(line.split()[0])
-         print("file total: %d" % file_total)
-         return
-      elif line.startswith("%com"):
+      if line.startswith("%com"):
          com = line.split()
          if len(com) > 1:
             #use a regular epxression to test for weird comments
@@ -45,7 +41,7 @@ class Parser:
          if self.comment_pending:
             output(self.out, "%s\n" % comment)
          self.comment_pending = False
-      elif not self.skipping and not line.startswith('@'):
+      elif not line.startswith('@'):
          #not a comment so clear any pending comment state
          if self.comment_pending:
             output(self.out, "%s\n" % comment)
@@ -65,7 +61,6 @@ class Parser:
 
          text = text.replace("&=crying",'')# EB added this
          text = text.replace("&=vfx",'') # EB added this
-         text = text.replace('&cv', '')
 
          parts = text.split()
          colon = text.find(':')
@@ -87,6 +82,9 @@ class Parser:
                speaker = text[4:space]
             else:
                speaker = text[4:]
+            if self.skipping:
+               output(self.out, "%s" % ("Object word was found within a skip - check your file and re-run the code!"))
+               sys.exit("Object word was found within a skip, please fix this issue in the .cex file! \n" + line)
             #print text
             if have_output:
                #generating multiple lines of output from single input line
