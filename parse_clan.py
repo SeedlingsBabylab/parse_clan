@@ -43,12 +43,12 @@ class Parser:
                   #not a weird comment so keep it
                   comment = line[5:].strip()
          if self.comment_pending:
-            output(self.out, "%s\n" % comment)
+            output(self.out, " ,%s\n" % comment)  # comment is written
          self.comment_pending = False
       elif not self.skipping and not line.startswith('@'):
          #not a comment so clear any pending comment state
          if self.comment_pending:
-            output(self.out, "%s\n" % comment)
+            output(self.out, " ,%s\n" % comment) # comment is written
          self.comment_pending = False
          parts = line.split('\x15')
          if len(parts) != 3:
@@ -72,6 +72,7 @@ class Parser:
          tier = text[:colon]
          text = text[colon+1:].strip()
          have_output = False
+
          while True:
             amp = text.find('&')
             if amp == -1:
@@ -90,7 +91,7 @@ class Parser:
             #print text
             if have_output:
                #generating multiple lines of output from single input line
-               output(self.out, 'NA\n')
+               output(self.out, ' ,NA\n')
             #print everything but the possible succeeding comment
             output(self.out, "%s,%s,%s,%s,%s,%s," % (tier, word, utterance_type, object_present, speaker, timestamp))
             have_output = True
@@ -115,7 +116,7 @@ class Parser:
       if len(full_line) > 0:
          self.process_line(full_line)
          if self.comment_pending:
-            output(self.out, "NA\n")
+            output(self.out, " ,NA\n") #comment written
 
       self.out.close()
 
